@@ -1,5 +1,32 @@
 import pika
+import sys
+import webbrowser
 import csv
+import time
+
+
+#####################################################################################
+
+# define variables for host, smoker_temp, food_a_temp, food_b_temp, 
+host = "localhost"
+tweet_queue = 'tweety_bird'
+csv_file = 'tweets.csv'
+show_offer = True #Define if you want to have the RabbitMQ Admit site opened, True = Y, False = N
+
+######################################################################################
+
+# define option to open rabbitmq admin site
+def offer_rabbitmq_admin_site(show_offer):
+    if show_offer == True:
+    
+        """Offer to open the RabbitMQ Admin website"""
+        ans = input("Would you like to monitor RabbitMQ queues? y or n ")
+        print()
+        if ans.lower() == "y":
+                webbrowser.open_new("http://localhost:15672/#/queues")
+                print()
+
+##########################################################################################
 
 # define send_tweet function to queue
 def send_tweet(host: str, queue_name: str, tweet: str):
